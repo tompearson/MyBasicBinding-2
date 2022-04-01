@@ -2,7 +2,8 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
 }
-apply plugin: 'kotlin-kapt' // Needed for annotation like @bindable in the MainViewModel.kt
+apply plugin: 'kotlin-kapt' // Needed for annotation like @bindable in the MainViewModel.kt. class BR will fail without.
+
 android {
     compileSdk 32
 
@@ -26,6 +27,7 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    // https://developer.android.com/jetpack/androidx/releases/databinding
     dataBinding {
         enabled true
     }
@@ -35,13 +37,30 @@ android {
 }
 
 dependencies {
+    def appcompat_version = "1.4.1"
+    def activity_version = "1.4.0"
+    def lifecycle_version = "2.4.1"
+    def core_version = "1.7.0"
+    def arch_version = "2.1.0"
 
-    implementation 'androidx.core:core-ktx:1.7.0'
-    implementation 'androidx.appcompat:appcompat:1.4.1'
+    // https://developer.android.com/jetpack/androidx/releases/appcompat
+    implementation "androidx.appcompat:appcompat:$appcompat_version"
+
+    // https://developer.android.com/jetpack/androidx/releases/lifecycle
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"// replaced extentions
+
+    // https://developer.android.com/jetpack/androidx/releases/activity
+    implementation "androidx.activity:activity-ktx:$activity_version"// Needed for 'by viewModels()'
+
+    // https://developer.android.com/jetpack/androidx/releases/core
+    implementation "androidx.core:core-ktx:$core_version"
+
+    // https://material.io/develop/android/docs/getting-started
     implementation 'com.google.android.material:material:1.5.0'
+
+    // https://developer.android.com/jetpack/androidx/releases/constraintlayout
     implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'// added
-    implementation 'androidx.fragment:fragment-ktx:1.4.1'// Needed for by viewModels()
+
 
 
     testImplementation 'junit:junit:4.13.2'

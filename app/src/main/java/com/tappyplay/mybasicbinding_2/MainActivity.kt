@@ -9,7 +9,7 @@ import androidx.lifecycle.Observer
 import com.tappyplay.mybasicbinding_2.databinding.ActivityMainBinding
 import viewmodels.NotesViewModel
 
-//import viewmodels.NotesViewModelFactory
+//import viewmodels.NotesViewModelFactory -- replaced with 'import viewmodels.NotesViewModel provided by dependency - androidx.activity:activity-ktx'
 
 class MainActivity : AppCompatActivity() {
     private lateinit var viewModel: NotesViewModel
@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         databinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
-        val viewModel: NotesViewModel by viewModels()
+        val viewModel: NotesViewModel by viewModels() // provided by dependency - androidx.activity:activity-ktx
 
         databinding.notesViewModel = viewModel
 
