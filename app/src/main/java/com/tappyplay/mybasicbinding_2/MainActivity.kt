@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ContentInfoCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import com.tappyplay.mybasicbinding_2.databinding.ActivityMainBinding
@@ -29,8 +30,8 @@ class MainActivity : AppCompatActivity() {
             databinding.content.text = it.toString()
         })
         viewModel.isStringEmpty.observe(this, Observer {
-            if (it == true) {
-                Toast.makeText(this, "No Notes Detected", Toast.LENGTH_SHORT).show();
+            if (it == false) {
+                Toast.makeText(this, "No Notes Detected", Toast.LENGTH_LONG).show();
             }
         })
     }
