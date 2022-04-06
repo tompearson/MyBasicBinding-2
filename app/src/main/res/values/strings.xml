@@ -1,3 +1,11 @@
 <resources>
-    <string name="app_name">MyBasicBinding-2</string>
+    <string name="app_name">Kotlin Databinding</string>
+
+    <!--    Life Cycle feature in the app  -->
+    <string name="onStop">\onStop detected</string>
+    <string name="onRestart">\nonRestart detected</string>
+    <string name="onResume">\nonResume detected</string>
+    <string name="onStart">\nonStart detected</string>
+    <string name="onPause">\nonPause detected</string>
+    <string name="onDestroy">\nonDestroy detected</string>
 </resources>
