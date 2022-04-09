@@ -13,6 +13,7 @@
 .externalNativeBuild
 .cxx
 .jks
+.gethub
 local.properties
 keystore.properties
 /.idea/.gitignore

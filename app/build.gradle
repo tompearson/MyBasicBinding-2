@@ -15,7 +15,7 @@ android {
     signingConfigs {
         // Run gradlew bash script: (for GitHub action)
         // openssl base64 < app/kotlin.jks | tr -d '\n' | tee your_signing_keystore_base64_encoded.txt
-
+        // https://developer.android.com/studio/build/building-cmdline#build_apk
         // gradlew app:assembleRelease    lands in   app\build\outputs\apk\app (18-seconds from clean)
         // gradlew app:assembleDebug      lands in   app\build\outputs\apk\app (14-seconds from clean)
         // gradlew app:bundleRelease      lands in   app\build\outputs\bundle\ (15-seconds from clean)
