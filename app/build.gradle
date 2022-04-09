@@ -7,12 +7,19 @@ apply plugin: 'kotlin-kapt' // Needed for annotation like @bindable in the MainV
 def theAppName = "Kotlin Databinding"
 
 // Load keystore
-def keystorePropertiesFile = rootProject.file("keystore.properties");
+def keystorePropertiesFile = rootProject.file("keystore.properties")
 def keystoreProperties = new Properties()
 keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 
 android {
     signingConfigs {
+        // Run gradlew bash script: (for GitHub action)
+        // openssl base64 < app/kotlin.jks | tr -d '\n' | tee your_signing_keystore_base64_encoded.txt
+
+        // gradlew app:assembleRelease    lands in   app\build\outputs\apk\app (18-seconds from clean)
+        // gradlew app:assembleDebug      lands in   app\build\outputs\apk\app (14-seconds from clean)
+        // gradlew app:bundleRelease      lands in   app\build\outputs\bundle\ (15-seconds from clean)
+        // gradlew app:bundleDebug        lands in   app\build\outputs\bundle\ (13-seconds from clean)
         release {
             storeFile file(keystoreProperties['storeFile'])
             storePassword keystoreProperties['storePassword']
@@ -31,7 +38,13 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
-
+    // (for GitHub action)
+    flavorDimensions "version"
+    productFlavors {
+        app {
+            applicationId "com.tappyplay.mybasicbinding_2"
+        }
+    }
     buildTypes {
         release {
             minifyEnabled false
@@ -42,6 +55,12 @@ android {
         debug {
             debuggable true
             manifestPlaceholders = [appName: "${theAppName} debug"]
+        }
+        // (for GitHub action)
+        android.applicationVariants.all { variant ->
+            variant.outputs.all {
+                outputFileName = "app-${variant.productFlavors[0].name}-${variant.buildType.name}-${variant.versionName}.apk"
+            }
         }
     }
     compileOptions {

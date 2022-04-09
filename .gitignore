@@ -12,6 +12,7 @@
 /captures
 .externalNativeBuild
 .cxx
+.jks
 local.properties
 keystore.properties
 /.idea/.gitignore
