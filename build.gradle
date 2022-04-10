@@ -4,7 +4,13 @@ plugins {
     id 'com.android.library' version '7.1.2' apply false
     id 'org.jetbrains.kotlin.android' version '1.6.10' apply false
 }
+//From article at   https://dev.to/jmfayard/how-do-i-setup-github-actions-for-my-gradle-or-android-project-3eal
+tasks.register("runOnGitHub") { // 1
+    dependsOn(":app:lint", ":app:testDebugUnitTest")  // 2 ==> CUSTOMIZE THIS LINE
+    group = "custom"      // 3
+    description = '$ ./gradlew runOnGitHub # runs on GitHub Action'
 
+}
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
