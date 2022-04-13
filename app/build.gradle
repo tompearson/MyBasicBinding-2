@@ -22,12 +22,12 @@ android {
         // gradlew app:bundleDebug        lands in   app\build\outputs\bundle\ (13-seconds from clean)
 
         // comment out release{} while working on GitHub workflow check_and_deploy.yml
-        release {
-            storeFile file(keystoreProperties['storeFile'])
-            storePassword keystoreProperties['storePassword']
-            keyAlias keystoreProperties['keyAlias']
-            keyPassword keystoreProperties['keyPassword']
-        }
+//        release {// this will fail in GitHub so comment it out. Signing only in GitHub workflow
+//            storeFile file(keystoreProperties['storeFile'])
+//            storePassword keystoreProperties['storePassword']
+//            keyAlias keystoreProperties['keyAlias']
+//            keyPassword keystoreProperties['keyPassword']
+//        }
     }
 
     defaultConfig {
