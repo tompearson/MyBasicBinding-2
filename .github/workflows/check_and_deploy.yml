@@ -1,6 +1,6 @@
 name: Test and deploy
 
-on: [push, workflow_dispatch]
+on: [ push, workflow_dispatch ]
 #on:
 #  push:
 #    tags:
@@ -11,25 +11,25 @@ on: [push, workflow_dispatch]
 
 jobs:
   unit_tests:
-    runs-on: [ubuntu-latest]
+    runs-on: [ ubuntu-latest ]
     steps:
       - uses: actions/checkout@v2
 
       - name: Unit tests
         run: ./gradlew test
-  android_tests:
-    runs-on: [ macos-latest ]
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Instrumentation Tests
-        uses: reactivecircus/android-emulator-runner@v2
-        with:
-          api-level: 32
-          emulator-build: 7425822
-          script: ./gradlew connectedAndroidTest
+#  android_tests:
+#    runs-on: [ macos-latest ]
+#    steps:
+#      - uses: actions/checkout@v2
+#
+#      - name: Instrumentation Tests
+#        uses: reactivecircus/android-emulator-runner@v2
+#        with:
+#          api-level: 32
+#          emulator-build: 7425822
+#          script: ./gradlew connectedAndroidTest
   build:
-    needs: [unit_tests, android_tests]
+    needs: [ unit_tests, android_tests ]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -54,6 +54,12 @@ jobs:
         with:
           name: mapping.txt
           path: app/build/outputs/mapping/release/mapping.txt
+      - name: Archive production artifacts
+#        if: always()
+      - uses: actions/upload-artifact@v2
+        with:
+          name: reports
+          path: app/build/reports
 #  deploy-firebase:
 #    needs: [build]
 #    runs-on: ubuntu-latest
