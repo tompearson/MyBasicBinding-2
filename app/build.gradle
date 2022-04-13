@@ -21,7 +21,7 @@ android {
         // gradlew app:bundleRelease      lands in   app\build\outputs\bundle\ (15-seconds from clean)
         // gradlew app:bundleDebug        lands in   app\build\outputs\bundle\ (13-seconds from clean)
 
-        // comment out release{} while working on GitHub workflow check_and_deploy.yml
+        // comment out release{} while working on GitHub workflow check_and_deploy.yml. Also signingConfig in release below.
 //        release {// this will fail in GitHub so comment it out. Signing only in GitHub workflow
 //            storeFile file(keystoreProperties['storeFile'])
 //            storePassword keystoreProperties['storePassword']
@@ -32,7 +32,7 @@ android {
 
     defaultConfig {
         applicationId "com.tappyplay.mybasicbinding_2"
-        compileSdk 32
+        compileSdkVersion 32
         minSdk 21
         targetSdk 32
         versionCode 1
