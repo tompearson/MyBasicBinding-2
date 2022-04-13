@@ -1,4 +1,4 @@
-name: Test and deploy
+name: Test and deploy tp1
 
 on: [ push, workflow_dispatch ]
 #on:
