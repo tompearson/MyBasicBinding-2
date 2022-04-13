@@ -54,12 +54,12 @@ jobs:
         with:
           name: mapping.txt
           path: app/build/outputs/mapping/release/mapping.txt
-      - name: Archive production artifacts
-#        if: always()
-      - uses: actions/upload-artifact@v2
-        with:
-          name: reports
-          path: app/build/reports
+#      - name: Archive production artifacts
+##        if: always()
+#      - uses: actions/upload-artifact@v2
+#        with:
+#          name: reports
+#          path: app/build/reports
 #  deploy-firebase:
 #    needs: [build]
 #    runs-on: ubuntu-latest
