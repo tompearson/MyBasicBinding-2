@@ -7,9 +7,10 @@ apply plugin: 'kotlin-kapt' // Needed for annotation like @bindable in the MainV
 def theAppName = "Kotlin Databinding"
 
 // Load keystore
-def keystorePropertiesFile = rootProject.file("keystore.properties")
-def keystoreProperties = new Properties()
-keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+// comment out keystoreProperties stuff while working on GitHub workflow check_and_deploy.yml. Also signingConfig in release below.
+//def keystorePropertiesFile = rootProject.file("keystore.properties")
+//def keystoreProperties = new Properties()
+//keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 
 android {
     signingConfigs {
