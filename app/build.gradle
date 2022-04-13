@@ -20,6 +20,8 @@ android {
         // gradlew app:assembleDebug      lands in   app\build\outputs\apk\app (14-seconds from clean)
         // gradlew app:bundleRelease      lands in   app\build\outputs\bundle\ (15-seconds from clean)
         // gradlew app:bundleDebug        lands in   app\build\outputs\bundle\ (13-seconds from clean)
+
+        // comment out release{} while working on GitHub workflow check_and_deploy.yml
         release {
             storeFile file(keystoreProperties['storeFile'])
             storePassword keystoreProperties['storePassword']
@@ -46,11 +48,12 @@ android {
         }
     }
     buildTypes {
-        release {
+        release { // apk lands in \app\build\intermediates\apk\app\release
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             manifestPlaceholders = [appName: "${theAppName} release"]
-            signingConfig signingConfigs.release
+            // comment out signingConfig while working on GitHub workflow check_and_deploy.yml
+//            signingConfig signingConfigs.release
         }
         debug {
             debuggable true
@@ -83,27 +86,32 @@ dependencies {
     def core_version = "1.7.0"
     def arch_version = "2.1.0"
 
+    // Support Libraries
+
     // https://developer.android.com/jetpack/androidx/releases/appcompat
     implementation "androidx.appcompat:appcompat:$appcompat_version"
-
-    // https://developer.android.com/jetpack/androidx/releases/lifecycle
-    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
-// replaced extentions
-
-    // https://developer.android.com/jetpack/androidx/releases/activity
-    implementation "androidx.activity:activity-ktx:$activity_version"// Needed for 'by viewModels()'
-
-    // https://developer.android.com/jetpack/androidx/releases/core
-    implementation "androidx.core:core-ktx:$core_version"
-
-    // https://material.io/develop/android/docs/getting-started
-    implementation 'com.google.android.material:material:1.5.0'
 
     // https://developer.android.com/jetpack/androidx/releases/constraintlayout
     implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
 
+    // https://developer.android.com/jetpack/androidx/releases/core
+    implementation "androidx.core:core-ktx:$core_version"
 
+    // https://developer.android.com/jetpack/androidx/releases/activity
+    implementation "androidx.activity:activity-ktx:$activity_version"// Needed for 'by viewModels()'
+
+    // Architecture Components
+
+    // https://developer.android.com/jetpack/androidx/releases/lifecycle
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"// replaced extentions
+
+    // https://material.io/develop/android/docs/getting-started
+    implementation 'com.google.android.material:material:1.5.0'
+
+    // AndroidX Test - JVM testing
     testImplementation 'junit:junit:4.13.2'
+
+    // AndroidX Test - Instrumented testing
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 }
