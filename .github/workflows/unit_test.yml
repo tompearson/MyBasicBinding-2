@@ -1,0 +1,19 @@
+name: Unit Test tp1
+
+on: [ push, workflow_dispatch ]
+#on:
+#  push:
+#    tags:
+#      - 'v*'
+#  pull_request:
+#    branches:
+#      - master
+
+jobs:
+  unit_tests:
+    runs-on: [ ubuntu-latest ]
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Unit tests
+        run: ./gradlew test
