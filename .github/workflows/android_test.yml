@@ -1,0 +1,23 @@
+name: Android_tests emulator
+
+on: [ push, workflow_dispatch ]
+#on:
+#  push:
+#    tags:
+#      - 'v*'
+#  pull_request:
+#    branches:
+#      - master
+
+jobs:
+  android_tests:
+    runs-on: [ macos-latest ]
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Instrumentation Tests
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 32
+          emulator-build: 7425822
+          script: ./gradlew connectedAndroidTest
